@@ -1,0 +1,37 @@
+name: hackathon-todo-phase2
+version: "2.0"
+description: "Phase II - Full-Stack Web Application with Authentication"
+
+structure:
+  specs_dir: specs
+  features_dir: specs/features
+  api_dir: specs/api
+  database_dir: specs/database
+  ui_dir: specs/ui
+
+phases:
+  - name: phase1-console
+    features: [task-crud]
+    status: completed
+  - name: phase2-web
+    features: [task-crud, authentication]
+    status: in-progress
+  - name: phase3-chatbot
+    features: [task-crud, authentication, chatbot]
+    status: planned
+
+tech_stack:
+  frontend:
+    framework: Next.js 16+
+    router: App Router
+    language: TypeScript
+    styling: Tailwind CSS
+  backend:
+    framework: FastAPI
+    orm: SQLModel
+    language: Python 3.13+
+  database:
+    provider: Neon Serverless PostgreSQL
+  authentication:
+    library: Better Auth
+    method: JWT tokens

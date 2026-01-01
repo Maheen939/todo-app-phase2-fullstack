@@ -1,0 +1,21 @@
+# Render.com deployment configuration
+
+services:
+  - type: web
+    name: todo-api
+    runtime: python
+    plan: free
+    buildCommand: pip install uv && uv sync
+    startCommand: uv run uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+        generateValue: true
+      - key: JWT_ALGORITHM
+        value: HS256
+      - key: TEST_MODE
+        value: false
+      - key: PYTHON_VERSION
+        value: 3.13.2

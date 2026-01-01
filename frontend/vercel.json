@@ -1,0 +1,25 @@
+{
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "outputDirectory": ".next",
+  "env": {
+    "NEXT_PUBLIC_API_URL": {
+      "description": "Backend API URL (e.g., https://your-api.railway.app)",
+      "required": true
+    },
+    "BETTER_AUTH_URL": {
+      "description": "Frontend URL (e.g., https://your-app.vercel.app)",
+      "required": true
+    },
+    "BETTER_AUTH_SECRET": {
+      "description": "Secret key for authentication (min 32 chars)",
+      "required": true
+    },
+    "DATABASE_URL": {
+      "description": "PostgreSQL connection string from Neon",
+      "required": true
+    }
+  }
+}
