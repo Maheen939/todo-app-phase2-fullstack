@@ -6,20 +6,16 @@
   "outputDirectory": ".next",
   "env": {
     "NEXT_PUBLIC_API_URL": {
-      "description": "Backend API URL (e.g., https://your-api.railway.app)",
-      "required": true
+      "description": "Backend API URL (e.g., https://your-api.railway.app)"
     },
     "BETTER_AUTH_URL": {
-      "description": "Frontend URL (e.g., https://your-app.vercel.app)",
-      "required": true
+      "description": "Frontend URL (e.g., https://your-app.vercel.app)"
     },
     "BETTER_AUTH_SECRET": {
-      "description": "Secret key for authentication (min 32 chars)",
-      "required": true
+      "description": "Secret key for authentication (min 32 chars)"
     },
     "DATABASE_URL": {
-      "description": "PostgreSQL connection string from Neon",
-      "required": true
+      "description": "PostgreSQL connection string from Neon"
     }
   }
 }
