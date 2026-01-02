@@ -3,7 +3,10 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install dependencies directly
+# Copy requirements first for better caching
+COPY pyproject.toml .
+
+# Install dependencies
 RUN pip install --no-cache-dir \
     fastapi>=0.115.0 \
     uvicorn[standard]>=0.32.0 \
@@ -14,10 +17,11 @@ RUN pip install --no-cache-dir \
     alembic>=1.13.3
 
 # Copy source code
-COPY . .
+COPY *.py ./
+COPY routes/ ./routes/
 
 # Expose port
 EXPOSE 8000
 
-# Run the application
+# Run from /app directory
 CMD ["python", "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
