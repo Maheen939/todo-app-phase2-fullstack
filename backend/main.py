@@ -4,7 +4,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from database import create_db_and_tables
-from routes import health, tasks
+from routes.health import router as health_router
+from routes.tasks import router as tasks_router
 
 # Create FastAPI application
 app = FastAPI(
@@ -30,8 +31,8 @@ app.add_middleware(
 )
 
 # Include route handlers
-app.include_router(health.router)  # Health check endpoint (no /api prefix)
-app.include_router(tasks.router, prefix="/api", tags=["tasks"])  # Task endpoints under /api
+app.include_router(health_router)  # Health check endpoint (no /api prefix)
+app.include_router(tasks_router, prefix="/api", tags=["tasks"])  # Task endpoints under /api
 
 
 @app.on_event("startup")

@@ -3,9 +3,6 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Copy everything at once
-COPY . .
-
 # Install dependencies
 RUN pip install --no-cache-dir \
     fastapi>=0.115.0 \
@@ -16,8 +13,8 @@ RUN pip install --no-cache-dir \
     python-dotenv>=1.0.1 \
     alembic>=1.13.3
 
-# Expose port
-EXPOSE 8000
+# Copy all files from context (backend folder) to /app
+COPY . .
 
-# Run from /app directory
+# Run the application
 CMD ["python", "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
