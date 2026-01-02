@@ -1,21 +1,23 @@
 # Dockerfile for backend deployment
-
-FROM python:3.13-slim
+FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install UV
-RUN pip install uv
+# Install dependencies directly
+RUN pip install --no-cache-dir \
+    fastapi>=0.115.0 \
+    uvicorn[standard]>=0.32.0 \
+    sqlmodel>=0.0.22 \
+    psycopg2-binary>=2.9.9 \
+    pyjwt>=2.9.0 \
+    python-dotenv>=1.0.1 \
+    alembic>=1.13.3
 
-# Copy project files
-COPY pyproject.toml uv.lock* ./
+# Copy source code
 COPY . .
-
-# Install dependencies
-RUN uv sync --frozen
 
 # Expose port
 EXPOSE 8000
 
 # Run the application
-CMD ["uv", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["python", "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
