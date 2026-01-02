@@ -3,8 +3,8 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Copy requirements first for better caching
-COPY pyproject.toml .
+# Copy everything at once
+COPY . .
 
 # Install dependencies
 RUN pip install --no-cache-dir \
@@ -15,10 +15,6 @@ RUN pip install --no-cache-dir \
     pyjwt>=2.9.0 \
     python-dotenv>=1.0.1 \
     alembic>=1.13.3
-
-# Copy source code
-COPY *.py ./
-COPY routes/ ./routes/
 
 # Expose port
 EXPOSE 8000
