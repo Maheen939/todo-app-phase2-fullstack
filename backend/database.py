@@ -18,12 +18,14 @@ if not DATABASE_URL:
         "Set it in .env file or environment."
     )
 
-# Create engine with connection pooling
+# Create engine with connection pooling (optimized for Neon serverless)
 engine = create_engine(
     DATABASE_URL,
-    pool_size=10,  # Number of connections to keep open
-    max_overflow=20,  # Maximum number of connections to create above pool_size
+    pool_size=2,  # Keep low for serverless databases
+    max_overflow=5,  # Limited overflow for serverless
     pool_pre_ping=True,  # Verify connections before using them
+    pool_recycle=300,  # Recycle connections every 5 minutes
+    connect_args={"connect_timeout": 10},  # 10 second timeout
     echo=False,  # Set to True for SQL query logging (useful for debugging)
 )
 
